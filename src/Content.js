@@ -1,48 +1,72 @@
 /*
     Event Listener
-    1. define your function like this: const clickHandler = () => { console.log('click') };
-    2. using your function by put it as reference in your jsx file and call it like this: <button onClick={clickHandler}>click</button>
-
-    useStake Hook
-    first, import useState from react
-    second, wrote value and setValue -> const [name, setName] = useState("dave"); ... setName("ali");
-    Note: if you use const for useState, when the function is called, the current value of state sent to the process and you can't change it,
-     so if you get the value of the state,you have the old value (value before change it thourght the function), 
-     the reason is we don't want to change the value directly.
 
 */
+import React from 'react'
 import { useState } from "react";
+import { FaTrashAlt } from "react-icons/fa";
 
 const Content = () => {
-  const [name, setName] = useState("Dave"); // default state of the name
-  const [count, setCount] = useState(0);
+  const [items, setItems] = useState([
+    {
+      id: 1,
+      checked: false,
+      item: "one half pound bag of Cocoa Covered Almonds Unsalted",
+    },
+    {
+      id: 2,
+      checked: false,
+      item: "item 2",
+    },
+    {
+      id: 3,
+      checked: false,
+      item: "item 3",
+    },
+  ]);
 
-  const handleNameChange = () => {
-    const names = ["pouya", "ali", "sina"];
-    const randomNumber = Math.floor(Math.random() * names.length);
-    setName(names[randomNumber]); // change value of the name
-  };
+  // we don't want to change state directly, so it's better to use high order functions to check value and create new list of value from previous one
+  const handleCheck = (id) => {
+    console.log(`key: ${id}`)
+    const listItems =  items.map( (item) => item.id === id ? {...item, checked: !item.checked} : item)
+    setItems(listItems);
+    
+    // if we want after reload latest state still reaminng for use
+    localStorage.setItem('shoppinglist', JSON.stringify(listItems))
+  }
 
-  const clickHandler = () => {
-    setCount(count + 1);
-    console.log(`${count} clicked`);
-  };
+  const handleDelete = (id) => {
+    const listItems = items.filter((item) => item.id !== id)
+    setItems(listItems)
+    localStorage.setItem('shoppinglist', JSON.stringify(listItems))
+  }
 
-  const clickHandler2 = (name) => {
-    console.log(`${name} was clicked`);
-  };
-
-  const clickHandler3 = (e) => {
-    console.log(e.target.innerText);
-  };
+  /* 
+  1. in order to show the list value, we can use map function in JSX.
+  2. each list item in react needs key. so we need to add key as attribute for list of items
+      react needs keys, it helps react to which item is changed, which item is deleted, because react responses to change state
+  3. we can use anonymouse function to call another function and send value to function eg:onChange={() => handleCheck(item.id)}
+*/
 
   return (
     <main>
-      <p onDoubleClick={clickHandler}>Hello, {name}!</p>
-      <button onClick={clickHandler}>click it</button>
-      <button onClick={() => clickHandler2("John")}>click number2</button>
-      <button onClick={(e) => clickHandler3(e)}>click event</button>
-      <button onClick={() => handleNameChange()}>change Name</button>
+      {items.length ? (
+        <ul>
+          {items.map((item) => (
+            <li className="item" key={item.id}>
+              <input type="checkbox" onChange={ () => handleCheck(item.id)} checked={item.checked} />
+              <label style={(item.checked) ? {textDecoration: 'line-through'} : null } onDoubleClick={ () => handleCheck(item.id)}>{item.item}</label>
+              <FaTrashAlt onClick={ () => handleDelete(item.id)} role="button" tabIndex="0" />
+            </li>
+          ))}
+        </ul>
+        ) : (
+          /*
+              if we directly set an inline style we have our curly brace to say this an expresion and then,
+               we need another curly brace to say this is style
+           */
+          <p style={ {marginTop: '2rem' }}> Your list is empty.</p>
+        )}
     </main>
   );
 };
