@@ -15,7 +15,7 @@ const ItemList = ( {items, handleCheck, handleDelete} ) => {
                 key={item.id}
                 item={item}
                 handleCheck={handleCheck}
-                handleDelete={handleCheck}
+                handleDelete={handleDelete}
             />
         ))}
     </ul>
