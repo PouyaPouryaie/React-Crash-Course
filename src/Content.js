@@ -14,6 +14,11 @@ const Content = ( {items, handleCheck, handleDelete} ) => {
   3. we can use anonymouse function to call another function and send value to function eg:onChange={() => handleCheck(item.id)}
 */
 
+/*
+  <p style = {{ backgroundColor: colorValue }}> -> 1. first curly bracket means you want to use expression
+                      2. second curly bracket allow us to pass the parameter (color value), also remeber that, the code is used JS in JSX
+*/
+
   return (
     <main>
       {items.length ? (
