@@ -21,3 +21,7 @@ useEffect ( () => setItems(load data from API), [items])
 - afte each changes at UI, you get render event
 - preventing null exception in initial state (load app at the first time), by using [] in useState <br> 
 `  const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppinglist')) || []);`
+- if we want to load data only occure at load time, we need to use `[]`
+` useEffect ( () => setItems(load data from API), [])`
+- you need to have whatever you put in the JSX inside of a parent element or element container and  <br> 
+you can use a fragment to do that.` return ( <> {your JSX Component} </> )`, in this syntax `<>` is a fragment

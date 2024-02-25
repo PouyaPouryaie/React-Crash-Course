@@ -9,34 +9,38 @@ import SearchItem from './SearchItem.js';
 
 function App() {
 
-  //use default state
-  // const [items, setItems] = useState([
-  //   {
-  //     id: 1,
-  //     checked: false,
-  //     item: "one half pound bag of Cocoa Covered Almonds Unsalted",
-  //   },
-  //   {
-  //     id: 2,
-  //     checked: false,
-  //     item: "item 2",
-  //   },
-  //   {
-  //     id: 3,
-  //     checked: false,
-  //     item: "item 3",
-  //   },
-  // ]);
+  const API_URL = 'http://localhost:3500/items';
 
-// preventing null exception in initial state by using [] in useState 
-
-  const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppinglist')) || []);
+  // preventing null exception in initial state by using [] in useState 
+  const [items, setItems] = useState([]);
 
   const [newItem, setNewItem] = useState('');
 
   const [search, setSearch] = useState('');
+  
+  const [fetchError, setFetchError] = useState(null);
 
-  useEffect( () => localStorage.setItem('shoppinglist', JSON.stringify(items)) , [items]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect( () => {
+
+    const fetchItems = async () => {
+      try {
+        const response = await fetch(API_URL);
+        if(!response.ok) throw Error('Did not receive expected data');
+        const listItems = await response.json();
+        setItems(listItems);
+        setFetchError(null);
+      } catch (err) {
+        setFetchError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+      
+    setTimeout(() => fetchItems(), 2000);
+
+  }, [] );
 
   const addItem = (item) => {
     const id = items.length ? items[items.length - 1].id + 1 : 1;
@@ -76,10 +80,15 @@ function App() {
           setNewItem={setNewItem}
           handleSubmit={handleSubmit}
       />
-      <Content 
-        items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLowerCase()))}
-        handleCheck={handleCheck}
-        handleDelete={handleDelete} />
+      <main>
+        {isLoading && <p>Loading Items...</p>}
+        {fetchError && <p style={{color: "red"}}>{ `Error: ${fetchError}`}</p>}
+        {!fetchError && !isLoading && <Content 
+          items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLowerCase()))}
+          handleCheck={handleCheck}
+          handleDelete={handleDelete} 
+          />}
+      </main>
       <Footer length={items.length}/>
     </div>
   );

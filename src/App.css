@@ -25,17 +25,17 @@ body {
   height: calc(100vh - 2px);
   max-width: 500px;
   text-align: center;
-  border: 1px solid darkcyan;
+  border: 1px solid mediumblue;
   margin: auto;
 }
 
 header {
   width: calc(100% - 2px);
   padding: 0 0.25em;
-  background-color: darkcyan;
+  background-color: mediumblue;
   color: aliceblue;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 

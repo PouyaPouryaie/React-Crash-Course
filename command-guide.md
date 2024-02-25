@@ -4,6 +4,10 @@
 ~~~ shell
 npx create-react-app app-name
 ~~~
+## run json server and define source of data
+~~~ shell
+npx json-server -p 3500 -w data/db.json
+~~~
 <br>
 
 build and start after each changes on localhost:
@@ -12,6 +16,9 @@ npm start
 ~~~
 
 install package with npm, (-D means --save)
+
+- [npm.js.com](https://www.npmjs.com/) is a site that you can search for packages and read documentation.
+
 ~~~shell
 npm i react-icons -D
 ~~~
@@ -39,6 +46,9 @@ npm uninstall react-icon
 1. [Styled components](https://styled-components.com/)
 2. [React-Icons](https://www.npmjs.com/package/react-icons)
 3. [Flex Guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+
+## some packages
+- <b>json-server </b>, it will allow you to quickly launch a development API, that you can work with as you build your front-end applications
 
 ## Open ssl Error
 
