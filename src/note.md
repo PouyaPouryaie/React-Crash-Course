@@ -25,3 +25,5 @@ useEffect ( () => setItems(load data from API), [items])
 ` useEffect ( () => setItems(load data from API), [])`
 - you need to have whatever you put in the JSX inside of a parent element or element container and  <br> 
 you can use a fragment to do that.` return ( <> {your JSX Component} </> )`, in this syntax `<>` is a fragment
+- each item in list needs a key
+    `<ul> {items.map(item => ( <ListItem key={item.id} ))} </ul>`

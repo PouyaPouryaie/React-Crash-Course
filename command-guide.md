@@ -47,6 +47,9 @@ npm uninstall react-icon
 2. [React-Icons](https://www.npmjs.com/package/react-icons)
 3. [Flex Guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 
+## some useful URL
+- [Fake Json data](https://jsonplaceholder.typicode.com)
+
 ## some packages
 - <b>json-server </b>, it will allow you to quickly launch a development API, that you can work with as you build your front-end applications
 
