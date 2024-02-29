@@ -66,3 +66,5 @@ npm uninstall react-icon
 ## Link and Resources
 - [github-link](https://github.com/gitdagray/react_resources/tree/main?tab=readme-ov-file)
 - [youtube-lin](https://www.youtube.com/watch?v=RVFAyFWO4go)
+- [Javascript Nuggets](https://www.youtube.com/watch?v=80KX6aD9R7M&list=PLnHJACx3NwAfRUcuKaYhZ6T5NRIpzgNGJ)
+- [15 React Projects](https://www.youtube.com/watch?v=a_7Z7C_JCyo)
