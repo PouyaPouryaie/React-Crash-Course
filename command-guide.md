@@ -15,7 +15,7 @@ build and start after each changes on localhost:
 npm start
 ~~~
 
-install package with npm, (-D means --save)
+install package with npm, (-D, -S means --save)
 
 - [npm.js.com](https://www.npmjs.com/) is a site that you can search for packages and read documentation.
 

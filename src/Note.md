@@ -19,6 +19,7 @@ useEffect ( () => setItems(load data from API), [items])
 
 ## Note
 - afte each changes at UI, you get render event
+- you can use `localStorage` to store and fetch data from local storage of clien `localStorage.setItem('shoppinglist', JSON.stringify(listItems));`
 - preventing null exception in initial state (load app at the first time), by using [] in useState <br> 
 `  const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppinglist')) || []);`
 - if we want to load data only occure at load time, we need to use `[]`
